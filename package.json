@@ -1,0 +1,14 @@
+{
+  "name": "alphibot",
+  "version": "1.0.0",
+  "description": "Discord bot for Fedora Express",
+  "main": "alfino.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antoine Robillard",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}
