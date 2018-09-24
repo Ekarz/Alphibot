@@ -28,10 +28,10 @@ module.exports = {
 
         data.push(`**Nom:** ${command.name}`)
 
-        if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`)
-        if (command.description) data.push(`**Description:** ${command.description}`)
-        if (command.usage) data.push(`**Utilisation:** ${prefix}${command.name} ${command.usage}`)
-        if (command.officerOnly) data.push(`*Utilisable uniquement par un officier.*`)
+        if (command.aliases)        data.push(`**Aliases:** ${command.aliases.join(', ')}`)
+        if (command.description)    data.push(`**Description:** ${command.description}`)
+        if (command.usage)          data.push(`**Utilisation:** ${prefix}${command.name} ${command.usage}`)
+        if (command.officerOnly)    data.push('*Utilisable uniquement par un officier.*')
 
         message.author.send(data, { split: true })
     },
