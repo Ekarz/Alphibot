@@ -26,7 +26,7 @@ client.on('message', message => {
             N'hésite pas à utiliser \`${prefix}help ${commandName}\``)
 
         if (command.guildOnly && message.channel.type !== 'text') {
-            return message.reply('Je ne peux pas exécuter cette commande dans un DM. :(')
+            return message.reply('Je ne peux pas exécuter cette commande dans un DM. 😦')
         }
 
         try {

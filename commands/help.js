@@ -26,11 +26,11 @@ module.exports = {
             return message.reply('Ce n\'est pas une commande valide !')
         }
 
-        data.push(`**Name:** ${command.name}`)
+        data.push(`**Nom:** ${command.name}`)
 
         if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`)
         if (command.description) data.push(`**Description:** ${command.description}`)
-        if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`)
+        if (command.usage) data.push(`**Utilisation:** ${prefix}${command.name} ${command.usage}`)
 
         // TODO data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`)
 
