@@ -32,8 +32,6 @@ module.exports = {
         if (command.description) data.push(`**Description:** ${command.description}`)
         if (command.usage) data.push(`**Utilisation:** ${prefix}${command.name} ${command.usage}`)
 
-        // TODO data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`)
-
         message.channel.send(data, { split: true })
     },
 }
