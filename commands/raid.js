@@ -6,6 +6,14 @@ module.exports = {
     officerOnly: true,
     description: 'Lance un appel aux disponibilités de raid.',
     execute(message, args) {
-        message.channel.send('Je ne sais pas encore lancer un raid mais ça vient !')
+        const startOfWeek = findNextTuesday()
+        message.channel.send(`Préparation d'un raid la semaine du mardi ${startOfWeek.getDate()}/${startOfWeek.getMonth()}... *(en cours de dev)*`)
     },
+}
+
+const findNextTuesday = () => {
+    const now = new Date()
+    const nextTuesday = new Date()
+    nextTuesday.setDate(now.getDate() + 7 - (now.getDay() + 5) % 7)
+    return nextTuesday
 }
