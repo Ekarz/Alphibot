@@ -15,30 +15,29 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-        if (!message.content.startsWith(prefix) || message.author.bot) return
+    if (!message.content.startsWith(prefix) || message.author.bot) return
 
-        const args = message.content.slice(prefix.length).split(/ +/)
-        const commandName = args.shift().toLowerCase()
-        if (!client.commands.has(commandName)) return
+    const args = message.content.slice(prefix.length).split(/ +/)
+    const commandName = args.shift().toLowerCase()
+    if (!client.commands.has(commandName)) return
 
-        const command = client.commands.get(commandName)
-        if (command.args && !args.length) return message.channel.send(`${message.author}, il manque des arguments ! 
+    const command = client.commands.get(commandName)
+    if (command.args && !args.length) return message.channel.send(`${message.author}, il manque des arguments ! 
         N'hésite pas à utiliser \`${prefix}help ${commandName}\``)
 
-        if (command.guildOnly && message.channel.type !== 'text') {
-            return message.reply('Je ne peux pas exécuter cette commande dans un DM. 😦')
-        }
-        if (command.officerOnly && !message.member.roles.some(role => role.name === 'Officiers')) {
-            return message.reply('Je ne peux exécuter cette commande que si un officier me le demande. Désolé !')
-        }
-
-        try {
-            command.execute(message, args)
-        } catch (error) {
-            console.error(error)
-            message.reply('there was an error trying to execute that command!')
-        }
+    if (command.guildOnly && message.channel.type !== 'text') {
+        return message.reply('Je ne peux pas exécuter cette commande dans un DM. 😦')
     }
-)
+    if (command.officerOnly && !message.member.roles.some(role => role.name === 'Officiers')) {
+        return message.reply('Je ne peux exécuter cette commande que si un officier me le demande. Désolé !')
+    }
+
+    try {
+        command.execute(message, args)
+    } catch (error) {
+        console.error(error)
+        message.reply('there was an error trying to execute that command!')
+    }
+})
 
 client.login(token)
