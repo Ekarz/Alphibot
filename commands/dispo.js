@@ -5,6 +5,6 @@ module.exports = {
     guildOnly: true,
     description: 'Donne une dispo pour l\'organisation du raid.',
     execute(message, args) {
-        message.channel.send('Je ne sais pas encore lancer une dispo mais ça vient !')
+        message.channel.send('Je ne sais pas encore envoyer une dispo mais ça vient !')
     },
 }
