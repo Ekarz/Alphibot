@@ -28,7 +28,7 @@ client.on('message', message => {
         if (command.guildOnly && message.channel.type !== 'text') {
             return message.reply('Je ne peux pas exécuter cette commande dans un DM. 😦')
         }
-        if (command.officerOnly && !message.author.roles.has('Officiers')) {
+        if (command.officerOnly && !message.member.roles.some(role => role.name === 'Officiers')) {
             return message.reply('Je ne peux exécuter cette commande que si un officier me le demande. Désolé !')
         }
 
