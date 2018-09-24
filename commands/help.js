@@ -11,7 +11,7 @@ module.exports = {
         if (!args.length) {
             data.push('Liste de mes commandes :')
             data.push(commands.map(command => command.name).join(', '))
-            data.push(`\nPour avoir des informations spécifiques à une commande, utilisez \`${prefix}help [command name]\`.`)
+            data.push(`Pour avoir des informations spécifiques à une commande, utilise \`${prefix}help [command name]\`.`)
 
             return message.author.send(data, { split: true })
                 .catch(error => {
