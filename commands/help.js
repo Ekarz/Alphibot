@@ -31,7 +31,8 @@ module.exports = {
         if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`)
         if (command.description) data.push(`**Description:** ${command.description}`)
         if (command.usage) data.push(`**Utilisation:** ${prefix}${command.name} ${command.usage}`)
+        if (command.officerOnly) data.push(`*Utilisable uniquement par un officier.*`)
 
-        message.channel.send(data, { split: true })
+        message.author.send(data, { split: true })
     },
 }
