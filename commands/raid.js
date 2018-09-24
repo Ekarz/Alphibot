@@ -7,7 +7,7 @@ module.exports = {
     description: 'Lance un appel aux disponibilités de raid.',
     execute(message, args) {
         const startOfWeek = findNextTuesday()
-        message.channel.send(`Préparation d'un raid la semaine du mardi ${startOfWeek.getDate()}/${startOfWeek.getMonth()}... *(en cours de dev)*`)
+        message.channel.send(`Préparation d'un raid la semaine du mardi ${startOfWeek.getDate()}/${startOfWeek.getMonth()+1}... *(en cours de dev)*`)
     },
 }
 
