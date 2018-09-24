@@ -1,9 +1,7 @@
-import Discord from 'discord.js'
-import fs      from 'fs'
-
-const { token, prefix } = require('properties')
-const { version } = require('package')
-
+const Discord = require('discord.js')
+const fs = require('fs')
+const { token, prefix } = require('./properties.json')
+const { version } = require('./package.json')
 const client = new Discord.Client()
 client.commands = new Discord.Collection()
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
