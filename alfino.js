@@ -11,7 +11,7 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
-    client.user.setActivity(version, { type: 'WATCHING' })
+    client.user.setActivity(`Version ${version}`, { type: 'WATCHING' })
 })
 
 client.on('message', message => {
