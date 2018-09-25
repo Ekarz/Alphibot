@@ -1,5 +1,5 @@
-const { raid }          = require('./raid')
-const { months, days }  = require('../properties.json')
+const { raid } = require('./raid')
+const { days } = require('../properties.json')
 
 module.exports = {
     name: 'dispo',
@@ -8,15 +8,15 @@ module.exports = {
     guildOnly: true,
     description: 'Donne une dispo pour l\'organisation du raid.',
     execute(message, args) {
-        const playerAdded = addPlayer(message.author.name, args[0], args [1])
+        const playerAdded = addPlayer(message.author, args[0], args [1])
         playerAdded ? message.react('✅') : message.react('🚫')
     },
 }
 
 const addPlayer = (playerName, day, hour) => {
-    const index = days.indexOf(day)
+    const index = days.indexOf(day.toLowerCase())
     if (index >= 0 && hour.match(/^([01]?[0-9]|2[0-3])[h:]([0-5][0-9])?$/)) {
-        raid[index].players.push({ playerName, hour })
+        raid[index].players[playerName] = hour
         return true
     } else return false
 }

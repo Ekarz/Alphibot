@@ -16,7 +16,7 @@ module.exports = {
             weekDay.setDate(startOfWeek.getDate() + days.indexOf(day))
             const raidDay = {
                 date: `${day} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
-                players: [], // one player = { playerName, hour }
+                players: {}, // one player = { playerName: hour }
             }
             this.raid.push(raidDay)
         }
