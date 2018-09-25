@@ -11,11 +11,11 @@ module.exports = {
     execute(message, args) {
         const startOfWeek = findNextTuesday()
         message.channel.send(`Préparation d'un raid la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
-        for (const day in days) {
-            const weekDay = new Date()
-            weekDay.setDate(startOfWeek.getDate() + Number(day))
+        for (const day of days) {
+            const weekDay = startOfWeek
+            weekDay.setDate(startOfWeek.getDate() + days.indexOf(day))
             const raidDay = {
-                date: `${days[day]} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
+                date: `${day} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
                 players: [], // one player = { playerName, hour }
             }
             this.raid.push(raidDay)
