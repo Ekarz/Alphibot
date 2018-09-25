@@ -4,6 +4,7 @@
   "description": "Discord bot for Fedora Express",
   "main": "alfino.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Antoine Robillard",
