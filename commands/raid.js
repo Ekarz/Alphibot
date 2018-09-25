@@ -9,6 +9,7 @@ module.exports = {
     description: 'Lance un appel aux disponibilités de raid.',
     raid: [], // Array 2 dimensions. dans raid => chaque jour de la semaine / dans chaque jour => les joueurs
     execute(message, args) {
+        this.raid.length = 0
         const startOfWeek = findNextTuesday()
         message.channel.send(`Préparation d'un raid la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
         for (const day of days) {
