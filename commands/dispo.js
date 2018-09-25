@@ -15,7 +15,7 @@ module.exports = {
 
 const addPlayer = (playerName, day, hour) => {
     const index = days.indexOf(day.toLowerCase())
-    if (index >= 0 && hour.match(/^([01]?[0-9]|2[0-3])[h:]([0-5][0-9])?$/)) {
+    if (index >= 0 && hour.match(/^([01]?[0-9]|2[0-3])[Hh:]([0-5][0-9])?$/)) {
         raid[index].players[playerName] = hour
         return true
     } else return false
