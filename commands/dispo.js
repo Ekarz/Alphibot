@@ -9,7 +9,7 @@ module.exports = {
     description: 'Donne une dispo pour l\'organisation du raid.',
     execute(message, args) {
         const playerAdded = addPlayer(message.author, args[0], args [1])
-        playerAdded ? message.react('✅') : message.react('🚫')
+        message.react(playerAdded ? '✅' : '🚫')
     },
 }
 
