@@ -1,4 +1,4 @@
-const { months, days } = require('../properties.json')
+const { months, days } = require('../config.json')
 
 module.exports = {
     name: 'raid',

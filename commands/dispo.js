@@ -1,5 +1,5 @@
 const { raid } = require('./raid')
-const { days } = require('../properties.json')
+const { days } = require('../config.json')
 
 module.exports = {
     name: 'dispo',
