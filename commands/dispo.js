@@ -1,3 +1,5 @@
+const { raid } = require('./raid')
+
 module.exports = {
     name: 'dispo',
     args: true,
@@ -5,6 +7,15 @@ module.exports = {
     guildOnly: true,
     description: 'Donne une dispo pour l\'organisation du raid.',
     execute(message, args) {
-        message.channel.send('Je ne sais pas encore envoyer une dispo mais ça vient !')
+        const playerAdded = addPlayer(message.author.name, args[0], args [1])
+        playerAdded ? message.react('✅') : message.react('🚫')
     },
+}
+
+const addPlayer = (playerName, day, hour) => {
+    const index = days.indexOf(day)
+    if (index >= 0 && hour.match(/([01]?[0-9]|2[0-3])[h:]([0-5][0-9])?/)) {
+        raid[index].players.push({ playerName, hour })
+        return true
+    } else return false
 }

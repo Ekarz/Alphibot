@@ -1,3 +1,6 @@
+const months = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]
+const days = ["mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche", "lundi"]
+
 module.exports = {
     name: 'raid',
     args: false,
@@ -5,9 +8,19 @@ module.exports = {
     guildOnly: true,
     officerOnly: true,
     description: 'Lance un appel aux disponibilités de raid.',
+    raid: [], // Array 2 dimensions. dans raid => chaque jour de la semaine / dans chaque jour => les joueurs
     execute(message, args) {
         const startOfWeek = findNextTuesday()
-        message.channel.send(`Préparation d'un raid la semaine du mardi ${startOfWeek.getDate()}/${startOfWeek.getMonth()+1}... *(en cours de dev)*`)
+        message.channel.send(`Préparation d'un raid la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
+        for (const day in days) {
+            const weekDay = new Date()
+            weekDay.setDate(startOfWeek.getDate() + Number(day))
+            const raidDay = {
+                date: `${days[day]} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
+                players: [], // one player = { playerName, hour }
+            }
+            raid.push(raidDay)
+        }
     },
 }
 
