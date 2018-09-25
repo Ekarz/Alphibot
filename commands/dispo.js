@@ -1,4 +1,5 @@
-const { raid } = require('./raid')
+const { raid }          = require('./raid')
+const { months, days }  = require('../properties.json')
 
 module.exports = {
     name: 'dispo',
@@ -14,7 +15,7 @@ module.exports = {
 
 const addPlayer = (playerName, day, hour) => {
     const index = days.indexOf(day)
-    if (index >= 0 && hour.match(/([01]?[0-9]|2[0-3])[h:]([0-5][0-9])?/)) {
+    if (index >= 0 && hour.match(/^([01]?[0-9]|2[0-3])[h:]([0-5][0-9])?$/)) {
         raid[index].players.push({ playerName, hour })
         return true
     } else return false

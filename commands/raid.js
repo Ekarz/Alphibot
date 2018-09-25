@@ -1,5 +1,4 @@
-const months = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]
-const days = ["mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche", "lundi"]
+const { months, days } = require('../properties.json')
 
 module.exports = {
     name: 'raid',
@@ -19,7 +18,7 @@ module.exports = {
                 date: `${days[day]} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
                 players: [], // one player = { playerName, hour }
             }
-            raid.push(raidDay)
+            this.raid.push(raidDay)
         }
     },
 }
