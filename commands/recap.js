@@ -4,6 +4,7 @@ module.exports = {
     name: 'recap',
     args: false,
     cooldown: 10,
+    raiderOnly: true,
     description: 'Demande un récapitulatif de l\'organisation actuelle pour le raid.',
     execute(message, args) {
         if (raid.length) {

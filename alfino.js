@@ -33,6 +33,9 @@ client.on('message', message => {
     if (command.officerOnly && !message.member.roles.some(role => role.name === 'Officiers')) {
         return message.reply('Je ne peux exécuter cette commande que si un officier me le demande. Désolé !')
     }
+    if (command.raiderOnly && !message.member.roles.some(role => role.name === 'Raiders')) {
+        return message.reply('Seul un raider peut faire ça. Go pex !')
+    }
 
     if (!cooldowns.has(command.name)) {
         cooldowns.set(command.name, new Discord.Collection())

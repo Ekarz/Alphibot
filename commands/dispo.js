@@ -6,6 +6,7 @@ module.exports = {
     args: true,
     usage: '[date] [time] | Exemple : jeudi 21h',
     guildOnly: true,
+    raiderOnly: true,
     description: 'Donne une dispo pour l\'organisation du raid.',
     execute(message, args) {
         const playerAdded = addPlayer(message.author, args[0], args [1])
