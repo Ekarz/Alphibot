@@ -13,7 +13,7 @@ module.exports = {
         const startOfWeek = findNextTuesday()
         message.channel.send(`Préparation d'un raid la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
         for (const day of days) {
-            const weekDay = startOfWeek
+            const weekDay = findNextTuesday()
             weekDay.setDate(startOfWeek.getDate() + days.indexOf(day))
             const raidDay = {
                 date: `${day} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
