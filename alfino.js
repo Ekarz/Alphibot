@@ -53,7 +53,6 @@ client.on('message', message => {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount
 
         if (now < expirationTime) {
-            const timeLeft = (expirationTime - now) / 1000
             return message.react('🕐')
         }
 
@@ -65,7 +64,7 @@ client.on('message', message => {
         command.execute(message, args)
     } catch (error) {
         console.error(error)
-        message.reply('Je n\'ai pas réussi à effectuer cette commande...')
+        message.reply("Quelque chose s'est mal passé pendant que j'essayais d'effectuer cette commande...")
     }
 })
 
