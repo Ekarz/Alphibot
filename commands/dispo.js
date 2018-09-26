@@ -9,8 +9,16 @@ module.exports = {
     raiderOnly: true,
     description: 'Donne une dispo pour l\'organisation du raid.',
     execute(message, args) {
-        const playerAdded = addPlayer(message.author, args[0], args [1])
-        message.react(playerAdded ? '✅' : '🚫')
+        let OK = true
+        for (let i = 0; i < args.length; i += 2) {
+            const playerAdded = addPlayer(message.author, args[i], args [i+1])
+            if (!playerAdded) {
+                message.reply(`La date "${args[i]} ${args[i+1]}" est mauvaise, mais j'ai pu traiter les dates d'avant s'il y en avait.`)
+                OK = false
+                break
+            }
+        }
+        message.react(OK ? '✅' : '🚫')
     },
 }
 
