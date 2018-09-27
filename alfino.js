@@ -64,6 +64,7 @@ client.on('message', message => {
         command.execute(message, args)
     } catch (error) {
         console.error(error)
+        console.error(`>> [${new Date()}] <${message.channel.name}> "${message.content}"`)
         message.reply("Quelque chose s'est mal passé pendant que j'essayais d'effectuer cette commande...")
     }
 })
