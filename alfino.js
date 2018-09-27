@@ -22,11 +22,12 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/)
     const commandName = args.shift().toLowerCase()
     if (!client.commands.has(commandName)) return
-
     const command = client.commands.get(commandName)
-    if (command.args && !args.length) return message.channel.send(`${message.author}, il manque des arguments ! 
-        N'hésite pas à utiliser \`${prefix}help ${commandName}\``)
 
+    if (command.args && !args.length) {
+        return message.channel.send(`${message.author}, il manque des arguments ! 
+        N'hésite pas à utiliser \`${prefix}help ${commandName}\``)
+    }
     if (command.guildOnly && message.channel.type !== 'text') {
         return message.reply('Je ne peux pas exécuter cette commande dans un DM. 😦')
     }
@@ -44,7 +45,6 @@ client.on('message', message => {
     const now = Date.now()
     const timestamps = cooldowns.get(command.name)
     const cooldownAmount = (command.cooldown || 3) * 1000
-
     if (!timestamps.has(message.author.id)) {
         timestamps.set(message.author.id, now)
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
