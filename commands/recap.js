@@ -37,7 +37,5 @@ const convertToMinutes = hour => {
 
 const convertToString = minutes => `${Math.floor(minutes / 60)}h${String(minutes % 60).padStart(2, '0')}`
 
-const findMax = array => array.reduce((acc, e) => acc = e > acc ? e : acc, array.pop())
-
 // finds earliest hour for now
-const organizeRaid = players => players.length >= 8 ? convertToString(findMax(players.map(e => convertToMinutes(e)))) : null
+const organizeRaid = players => players.length >= 8 ? convertToString(Math.max(...players.map(e => convertToMinutes(e)))) : null
