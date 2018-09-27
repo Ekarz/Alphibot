@@ -24,7 +24,7 @@ module.exports = {
                     data2.push(`Il est possible de partir le **${raidDay.date}** à ${raidHour}`)
                 }
             }
-            message.channel.send(data.length ? data : "Personne ne s'est inscrit-e pour l'instant...")
+            message.author.send(data.length ? data : "Personne ne s'est inscrit-e pour l'instant...")
             if (data2.length) message.channel.send(data2)
         } else return message.channel.send("Aucun raid n'a été préparé pour le moment !")
     },
