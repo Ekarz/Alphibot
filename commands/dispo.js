@@ -10,10 +10,11 @@ module.exports = {
     name: 'dispo',
     args: true,
     usage: "[groupe de jours] [heure unique]\nCet usage peut être utilisé plusieurs fois dans une seule commande.\n" +
-        "*Exemple :* lundi jeudi 21h mardi 20h\nIl est possible d'utiliser week, weekend ou all comme raccourci pour les jours.",
+        "Exemple : `!dispo lundi jeudi 21h mardi 20h`\nIl est possible d'utiliser week, weekend ou all comme raccourci pour les jours.",
     guildOnly: true,
     raiderOnly: true,
-    description: "Envoie une dispo pour l'organisation du raid. En cas d'échec, il est possible qu'une partie des paramètres aient été traités quand même ; à vérifier avec un `!recap`.",
+    description: "Envoie une dispo pour l'organisation du raid. En cas d'échec, il est possible qu'une partie des " +
+        "paramètres aient été traités quand même ; à vérifier avec un `!recap`.",
     execute(message, args) {
         const playerAdded = addPlayer(message.author, args)
         message.react(playerAdded ? '✅' : '🚫')
