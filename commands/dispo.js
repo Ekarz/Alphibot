@@ -30,12 +30,12 @@ const addPlayer = (playerName, args) => {
             const restOfArgs = args.slice(args.indexOf(arg) + 1)
             switch (arg.toLowerCase()) {
                 case 'week':
-                    return addPlayer(playerName, week.concat(restOfArgs))
+                    return addPlayer(playerName, groupOfDays.concat(week.concat(restOfArgs)))
                 case 'all':
-                    return addPlayer(playerName, days.concat(restOfArgs))
+                    return addPlayer(playerName, groupOfDays.concat(days.concat(restOfArgs)))
                 case 'weekend':
                 case 'we':
-                    return addPlayer(playerName, weekend.concat(restOfArgs))
+                    return addPlayer(playerName, groupOfDays.concat(weekend.concat(restOfArgs)))
             }
         }
         else if (arg.match(hourRegex)) {
