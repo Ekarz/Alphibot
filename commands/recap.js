@@ -1,4 +1,5 @@
 const { raid } = require('./raid')
+const raidSize = 8
 
 module.exports = {
     name: 'recap',
@@ -19,9 +20,12 @@ module.exports = {
                     }
                     data.push(str.slice(0, -2))
                 }
-                const raidHour = organizeRaid(Object.values(raidDay.players))
+                const raidHour = organizeRaid(raidDay.players)
                 if (raidHour !== null) {
-                    data2.push(`Il est possible de partir le **${raidDay.date}** à ${raidHour}`)
+                    data2.push(`Il est possible de partir le **${raidDay.date}** :`)
+                    for (const raidPossibility of Object.entries(raidHour)) {
+                        data2.push(`- à ${convertToString(raidPossibility[0])} avec ${raidPossibility[1]}`)
+                    }
                 }
             }
             message.author.send(data.length ? data : "Personne ne s'est inscrit-e pour l'instant...")
@@ -37,5 +41,16 @@ const convertToMinutes = hour => {
 
 const convertToString = minutes => `${Math.floor(minutes / 60)}h${String(minutes % 60).padStart(2, '0')}`
 
-// finds earliest hour for now
-const organizeRaid = players => players.length >= 8 ? convertToString(Math.max(...players.map(e => convertToMinutes(e)))) : null
+const organizeRaid = players => {
+    const hours = Object.values(players).map(e => convertToMinutes(e))
+    const playerNames = Object.keys(players)
+    if (hours.length < raidSize) return null
+    const result = {}
+    while (hours.length >= raidSize) {
+        const hour = Math.max(...hours)
+        if (result[hour] === undefined) result[hour] = playerNames.slice()
+        playerNames.splice(hours.indexOf(hour), 1)
+        hours.splice(hours.indexOf(hour), 1)
+    }
+    return result
+}
