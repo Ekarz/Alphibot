@@ -26,7 +26,7 @@ const addPlayer = (playerName, args) => {
     for (arg of args) {
         const index = days.indexOf(arg.toLowerCase())
         if (index >= 0) groupOfDays.push(arg.toLowerCase())
-        else if (arg.match(shortcuts)) {
+        else if (arg.toLowerCase().match(shortcuts)) {
             const restOfArgs = args.slice(args.indexOf(arg) + 1)
             switch (arg.toLowerCase()) {
                 case 'week':
