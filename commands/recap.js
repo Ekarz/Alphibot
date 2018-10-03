@@ -14,7 +14,8 @@ module.exports = {
             const data2 = []
             for (raidDay of raid) {
                 if (Object.keys(raidDay.players).length) {
-                    let str = `**${raidDay.date} :** `
+                    const numberOfPlayers = Object.keys(raidDay.players).length
+                    let str = `**[${numberOfPlayers}] ${raidDay.date} :** `
                     for (playerName of Object.keys(raidDay.players)) {
                         str += `${playerName} (${raidDay.players[playerName]}), `
                     }
