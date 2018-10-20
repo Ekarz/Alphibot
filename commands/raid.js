@@ -15,15 +15,7 @@ module.exports = {
         endOfWeek.setDate(findNextTuesday().getDate() + 6)
         message.channel.send(`Préparation d'un raid pour la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}** ` +
             `au **lundi ${endOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
-        for (const day of days) {
-            const weekDay = findNextTuesday()
-            weekDay.setDate(startOfWeek.getDate() + days.indexOf(day))
-            const raidDay = {
-                date: `${day} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
-                players: {}, // one player = { playerName: hour }
-            }
-            this.raid.push(raidDay)
-        }
+        setupRaid(this, startOfWeek)
     },
 }
 
@@ -32,4 +24,16 @@ const findNextTuesday = () => {
     const nextTuesday = new Date()
     nextTuesday.setDate(now.getDate() + 7 - (now.getDay() + 5) % 7)
     return nextTuesday
+}
+
+const setupRaid = (context, startOfWeek) => {
+    for (const day of days) {
+        const weekDay = findNextTuesday()
+        weekDay.setDate(startOfWeek.getDate() + days.indexOf(day))
+        const raidDay = {
+            date: `${day} ${weekDay.getDate()} ${months[weekDay.getMonth()]}`,
+            players: {}, // one player = { playerName: hour }
+        }
+        context.raid.push(raidDay)
+    }
 }
