@@ -11,7 +11,10 @@ module.exports = {
     execute(message, args) {
         this.raid.length = 0
         const startOfWeek = findNextTuesday()
-        message.channel.send(`Préparation d'un raid la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
+        const endOfWeek = new Date()
+        endOfWeek.setDate(findNextTuesday().getDate() + 6)
+        message.channel.send(`Préparation d'un raid pour la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}** ` +
+            `au **lundi ${endOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
         for (const day of days) {
             const weekDay = findNextTuesday()
             weekDay.setDate(startOfWeek.getDate() + days.indexOf(day))
