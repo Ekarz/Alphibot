@@ -16,7 +16,10 @@ client.on('ready', () => {
     client.user.setActivity(`Version ${version}`, { type: 'WATCHING' })
 })
 
-client.on('error', console.error)
+client.on('error', (error) => {
+    console.error(error)
+    client.user.setActivity(`Version ${version}`, { type: 'WATCHING' })
+})
 
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return
