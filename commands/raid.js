@@ -7,7 +7,7 @@ module.exports = {
     guildOnly: true,
     officerOnly: true,
     description: 'Lance un appel aux disponibilités de raid.',
-    raid: [], // Array 2 dimensions. dans raid => chaque jour de la semaine / dans chaque jour => les joueurs
+    raid: [], // Array d'objets (raidDay). cf plus bas
     execute(message, args) {
         this.raid.length = 0
         const startOfWeek = findNextTuesday()
