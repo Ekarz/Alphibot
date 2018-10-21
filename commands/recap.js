@@ -10,27 +10,14 @@ module.exports = {
     description: 'Demande un récapitulatif de l\'organisation actuelle pour le raid.',
     execute(message, args) {
         if (raid.length) {
-            const data = []
-            const data2 = []
+            const baseRecapMessage = []
+            const raidPossibilitiesMessage = []
             for (raidDay of raid) {
-                const numberOfPlayers = Object.keys(raidDay.players).length
-                if (numberOfPlayers) {
-                    let str = `**[${numberOfPlayers}] ${raidDay.date} :** `
-                    for (playerName of Object.keys(raidDay.players)) {
-                        str += `${playerName} (${raidDay.players[playerName]}), `
-                    }
-                    data.push(str.slice(0, -2))
-                }
-                const raidHour = organizeRaid(raidDay.players)
-                if (raidHour !== null) {
-                    data2.push(`Il est possible de partir le **${raidDay.date}** :`)
-                    for (const raidPossibility of Object.entries(raidHour)) {
-                        data2.push(`- à ${convertToString(raidPossibility[0])} avec ${raidPossibility[1]}`)
-                    }
-                }
+                fillBaseRecapMessage(raidDay, baseRecapMessage)
+                fillRaidPossibilitiesMessage(raidDay, raidPossibilitiesMessage)
             }
-            message.author.send(data.length ? data : "Personne ne s'est inscrit-e pour l'instant...")
-            if (data2.length) message.channel.send(data2)
+            message.author.send(baseRecapMessage.length ? baseRecapMessage : "Personne ne s'est inscrit-e pour l'instant...")
+            if (raidPossibilitiesMessage.length) message.channel.send(raidPossibilitiesMessage)
         } else return message.channel.send("Aucun raid n'a été préparé pour le moment !")
     },
 }
@@ -42,16 +29,37 @@ const convertToMinutes = hour => {
 
 const convertToString = minutes => `${Math.floor(minutes / 60)}h${String(minutes % 60).padStart(2, '0')}`
 
-const organizeRaid = players => {
+const fillBaseRecapMessage = (raidDay, data) => {
+    const numberOfPlayers = Object.keys(raidDay.players).length
+    if (numberOfPlayers) {
+        let str = `**[${numberOfPlayers}] ${raidDay.date} :** `
+        for (playerName of Object.keys(raidDay.players)) {
+            str += `${playerName} (${raidDay.players[playerName]}), `
+        }
+        data.push(str.slice(0, -2))
+    }
+}
+
+const findPossibleRaidHours = players => {
     const hours = Object.values(players).map(e => convertToMinutes(e))
     const playerNames = Object.keys(players)
     if (hours.length < raidSize) return null
-    const result = {}
+    const possibleRaidHours = {}
     while (hours.length >= raidSize) {
         const hour = Math.max(...hours)
-        if (result[hour] === undefined) result[hour] = playerNames.slice()
+        if (possibleRaidHours[hour] === undefined) possibleRaidHours[hour] = playerNames.slice()
         playerNames.splice(hours.indexOf(hour), 1)
         hours.splice(hours.indexOf(hour), 1)
     }
-    return result
+    return possibleRaidHours
+}
+
+const fillRaidPossibilitiesMessage = (raidDay, data) => {
+    const possibleRaidHours = findPossibleRaidHours(raidDay.players)
+    if (possibleRaidHours !== null) {
+        data.push(`Il est possible de partir le **${raidDay.date}** :`)
+        for (const possibleRaidHour of Object.entries(possibleRaidHours)) {
+            data.push(`- à ${convertToString(possibleRaidHour[0])} avec ${possibleRaidHour[1]}`)
+        }
+    }
 }
