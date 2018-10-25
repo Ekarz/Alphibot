@@ -13,11 +13,12 @@ module.exports = {
         const startOfWeek = findNextTuesday()
         const endOfWeek = new Date()
         endOfWeek.setDate(findNextTuesday().getDate() + 6)
-        message.channel.send(`Préparation d'un raid pour la semaine du **mardi ${startOfWeek.getDate()} ${months[startOfWeek.getMonth()]}** ` +
-            `au **lundi ${endOfWeek.getDate()} ${months[startOfWeek.getMonth()]}**...`)
+        message.channel.send(`Préparation d'un raid pour la semaine du **${formatDate(startOfWeek)}** au **${formatDate(endOfWeek)}**...`)
         setupRaid(this, startOfWeek)
     },
 }
+
+const formatDate = date => `${days[(date.getDay() + 5) % 7]} ${date.getDate()} ${months[date.getMonth()]}`
 
 const findNextTuesday = () => {
     const now = new Date()
