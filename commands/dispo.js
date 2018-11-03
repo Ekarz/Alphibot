@@ -1,4 +1,5 @@
 const { raid } = require('./raid')
+const { unavailablePlayers } = require('./pasdispo')
 const { days } = require('../config.json')
 
 const hourRegex = /^([01]?[0-9]|2[0-3])[Hh:]([0-5][0-9])?$/
@@ -17,6 +18,7 @@ module.exports = {
         "paramètres aient été traités quand même ; à vérifier avec un `!recap`.",
     execute(message, args) {
         const playerAdded = addPlayer(message.author, args)
+        if (playerAdded) removePlayerFromUnavailablePlayers(message.author)
         message.react(playerAdded ? '✅' : '🚫')
     },
 }
@@ -48,4 +50,9 @@ const addPlayer = (playerName, args) => {
         else return false
     }
     return (args.length >= 2 && !!args[args.length - 1].match(hourRegex))
+}
+
+const removePlayerFromUnavailablePlayers = playerName => {
+    const index = unavailablePlayers.indexOf(playerName)
+    return index >= 0 && unavailablePlayers.splice(index, 1)
 }

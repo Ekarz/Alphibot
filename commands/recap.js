@@ -1,4 +1,5 @@
 const { raid } = require('./raid')
+const { unavailablePlayers } = require('./pasdispo')
 
 const raidSize = 8
 const nbOfTanksAndHealers = 2
@@ -17,9 +18,10 @@ module.exports = {
             const members = message.guild.members
             const baseRecapMessage = [], raidPossibilitiesMessage = []
             for (raidDay of raid) {
-                fillBaseRecapMessage(raidDay, baseRecapMessage)
-                fillRaidPossibilitiesMessage(raidDay, members, raidPossibilitiesMessage)
+                addAvailablePlayers(raidDay, baseRecapMessage)
+                addPossibleRaidHoursWithPlayers(raidDay, members, raidPossibilitiesMessage)
             }
+            addUnavailablePlayers(baseRecapMessage)
             message.author.send(baseRecapMessage.length ? baseRecapMessage : "Personne ne s'est inscrit-e pour l'instant...")
             if (raidPossibilitiesMessage.length) message.channel.send(raidPossibilitiesMessage)
         } else return message.channel.send("Aucun raid n'a été préparé pour le moment !")
@@ -33,7 +35,7 @@ const convertToMinutes = hour => {
 
 const convertToString = minutes => `${Math.floor(minutes / 60)}h${String(minutes % 60).padStart(2, '0')}`
 
-const fillBaseRecapMessage = (raidDay, data) => {
+const addAvailablePlayers = (raidDay, data) => {
     const numberOfPlayers = Object.keys(raidDay.players).length
     if (numberOfPlayers) {
         let str = `**[${numberOfPlayers}] ${raidDay.date} :** `
@@ -41,6 +43,12 @@ const fillBaseRecapMessage = (raidDay, data) => {
             str += `${playerName} (${raidDay.players[playerName]}), `
         }
         data.push(str.slice(0, -2))
+    }
+}
+
+const addUnavailablePlayers = data => {
+    if (unavailablePlayers.length) {
+        data.push(`**Sont indisponibles :** ${unavailablePlayers}`)
     }
 }
 
@@ -58,7 +66,7 @@ const findPossibleRaidHours = (players, members) => {
     return possibleRaidHours
 }
 
-const fillRaidPossibilitiesMessage = (raidDay, members, data) => {
+const addPossibleRaidHoursWithPlayers = (raidDay, members, data) => {
     const possibleRaidHours = findPossibleRaidHours(raidDay.players, members)
     if (Object.keys(possibleRaidHours).length) {
         data.push(`Il est possible de partir le **${raidDay.date}** :`)
