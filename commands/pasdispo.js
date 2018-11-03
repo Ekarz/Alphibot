@@ -2,7 +2,7 @@ const { raid } = require('./raid')
 
 module.exports = {
     name: 'pasdispo',
-    description: "Indique une absence de disponibilités pour ne pas être pris en compte lors des appels générés par" +
+    description: "Indique une absence de disponibilités pour ne pas être pris en compte lors des appels générés par " +
         "la commande spam.",
     guildOnly: true,
     raiderOnly: true,
