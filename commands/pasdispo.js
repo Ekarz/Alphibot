@@ -9,7 +9,7 @@ module.exports = {
     unavailablePlayers: [],
     execute(message, args) {
         emptyAvailabilities(message.author)
-        this.unavailablePlayers.push(message.author)
+        if (!this.unavailablePlayers.includes(message.author)) this.unavailablePlayers.push(message.author)
         message.react('✅')
     },
 }
