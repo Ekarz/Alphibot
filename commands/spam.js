@@ -19,6 +19,7 @@ module.exports = {
                 if (index >= 0) raiders.splice(index, 1)
             }
         }
-        return message.channel.send(`${raiders.map(e => `<@${e}>`)}, merci de renseigner vos dispos !`)
+        return message.channel.send(raiders.length ? (`${raiders.map(e => `<@${e}>`)}, merci de renseigner vos dispos !`
+        ) : ("Je n'ai personne à spam ; tout le monde a répondu !"))
     },
 }
