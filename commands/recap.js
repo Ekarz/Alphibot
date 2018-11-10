@@ -38,12 +38,17 @@ const convertToString = minutes => `${Math.floor(minutes / 60)}h${String(minutes
 const addAvailablePlayers = (raidDay, data) => {
     const numberOfPlayers = Object.keys(raidDay.players).length
     if (numberOfPlayers) {
-        let str = `**[${numberOfPlayers}] ${raidDay.date} :** `
+        let str = `**[${numberOfPlayers}] ${formatDate(raidDay.date)} :** `
         for (playerName of Object.keys(raidDay.players)) {
             str += `${playerName} (${raidDay.players[playerName]}), `
         }
         data.push(str.slice(0, -2))
     }
+}
+
+const formatDate = date => {
+    const [weekDay, day, month] = date.split(' ')
+    return `${weekDay.slice(0, 3)}. ${day} ${month.slice(0, 3)}.`
 }
 
 const addUnavailablePlayers = data => {
