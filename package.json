@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.4.2"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
   }
 }
